@@ -29,4 +29,25 @@ describe "Weetzie Bat Characters API"  do
 		end
 	end
 
+	describe "POST /characters" do
+		it "creates a character" do
+			character_params = {
+				character: {
+					name: "Weetzie Bat",
+					style: "bleach-blonde flat-top, dresses with fringe"
+				}
+			}.to_json	
+
+			request_headers = {
+				"Accept" => "application/json",
+				"Content-Type" => "application/json"
+			}
+
+			post "/characters", character_params, request_headers
+			
+			expect(response.status).to eq 201 #created
+			expect(Character.first.style).to eq "bleach-blonde flat-top, dresses with fringe"
+		end
+	end
+
 end
