@@ -16,6 +16,19 @@ class CharactersController < ApplicationController
 		end
 	end
 
+	def update
+		@character = Character.find(params[:id])
+		if @character.update(character_params)
+			render json: @character
+		end
+	end
+
+	def destroy
+		@character = Character.find(params[:id])
+		@character.destroy
+		head :no_content
+	end
+
   private
 
     def character_params
